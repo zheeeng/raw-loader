@@ -29,7 +29,7 @@ module.exports = function rawLoader(source) {
   const before = options.before || '';
   const after = options.after || '';
   const prevent = options.prevent
-    ? `;window['${options.prevent}'] !== undefined && throw Error();`
+    ? `;if (window['${options.prevent}'] !== undefined){ throw Error() };`
     : '';
 
   const decoratedSource = `${before}${prevent}${source}${after}`;
