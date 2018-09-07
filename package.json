@@ -1,6 +1,6 @@
 {
 	"name": "raw-loader-bump",
-	"version": "0.5.1",
+	"version": "0.0.2",
 	"description": "A loader for webpack that allows importing files as a String",
 	"license": "MIT",
 	"repository": "webpack-contrib/raw-loader",

@@ -26,15 +26,17 @@ module.exports = function rawLoader(source) {
 
   this.value = source;
 
-  const json = JSON.stringify(source)
-    .replace(/\u2028/g, '\\u2028')
-    .replace(/\u2029/g, '\\u2029');
-
   const before = options.before || '';
   const after = options.after || '';
   const prevent = options.prevent
     ? `;window['${options.prevent}'] !== undefined && throw Error();`
     : '';
 
-  return `module.exports = ${before}${prevent}${json}${after}`;
+  const decoratedSource = `${before}${prevent}${source}${after}`;
+
+  const json = JSON.stringify(decoratedSource)
+    .replace(/\u2028/g, '\\u2028')
+    .replace(/\u2029/g, '\\u2029');
+
+  return `module.exports = ${json}`;
 };
